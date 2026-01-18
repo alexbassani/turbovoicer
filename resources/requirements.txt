@@ -1,0 +1,15 @@
+# TurboVoicer - Python Dependencies
+# Instalado automaticamente pelo RVC Installer
+
+# Edge TTS - Microsoft Text-to-Speech
+edge-tts>=6.1.9
+
+# RVC API Client
+requests>=2.31.0
+
+# Audio Processing (instalado com RVC-API)
+# torch>=2.0.0
+# torchaudio>=2.0.0
+# librosa>=0.10.0
+# soundfile>=0.12.0
+# numpy>=1.24.0

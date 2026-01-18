@@ -1,0 +1,65 @@
+{
+  "name": "turbovoicer",
+  "version": "1.0.0",
+  "description": "TurboVoicer - Conversão de Voz com IA usando RVC",
+  "main": "src/main.js",
+  "author": "Alex Bassani Designer e Infoprodutor Digital Ltda",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --no-sandbox",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux"
+  },
+  "dependencies": {
+    "electron": "^28.3.3",
+    "adm-zip": "^0.5.10",
+    "axios": "^1.6.0",
+    "node-fetch": "^2.7.0"
+  },
+  "devDependencies": {
+    "electron-builder": "^24.13.3",
+    "ffmpeg-static": "^5.2.0"
+  },
+  "build": {
+    "appId": "com.turbostudio.turbovoicer",
+    "productName": "TurboVoicer",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "public/**/*",
+      "resources/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "resources/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "extraResources": [
+      {
+        "from": "resources",
+        "to": "turbovoicer",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ]
+  }
+}

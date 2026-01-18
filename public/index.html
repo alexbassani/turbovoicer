@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TurboVoicer - Conversão de Voz Profissional</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/preview-buttons.css">
+    <link rel="stylesheet" href="css/audio-source.css">
+    <link rel="stylesheet" href="css/loading-overlay.css">
+    <link rel="stylesheet" href="css/accordion.css">
+    
+    <!-- UI Improvements - 15/01/2026 -->
+    <link rel="stylesheet" href="css/ui-improvements.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <div class="header-content">
+            <div class="header-left">
+                <div class="header-icon">
+                    <svg viewBox="0 0 10637.44 8067.79" fill="currentColor">
+                        <path d="M249.5 4742.48c-137.79,0 -249.5,-111.71 -249.5,-249.5 0,-137.79 111.71,-249.5 249.5,-249.5l2192.72 0 720.12 -3300.33 491.21 23.38 386.77 3276.94 240.02 0 529.37 -4243.48 496.08 10.72 348.21 4232.76 358 0 292.82 -2024.63 491.21 -11.7 393.64 2036.33 406.16 0 442.13 -1587.66 470.74 -27.29 653.74 1614.94 1225.51 0c137.79,0 249.5,111.71 249.5,249.5 0,137.79 -111.71,249.5 -249.5,249.5l-2414.67 0 -421.39 1513.15 -484.38 -19.49 -288.74 -1493.66 -335.65 0 -480.95 3325.32 -495.1 -15.6 -272.28 -3309.72 -474.07 0 -322.96 2588.94 -495.11 -0.97 -305.46 -2587.97 -753.59 0 -353.01 1617.9 -479.51 25.35 -546.95 -1643.25 -1214.63 0zm2702.98 -499l585.82 0 -205.65 -1742.34 -380.17 1742.34zm1830.49 0l370.77 0 -147.34 -1791 -223.42 1791zm1732.32 0l167.02 0 -95.54 -494.23 -71.48 494.23zm1596.94 0l512.47 0 -303.61 -750.01 -208.86 750.01zm-655.38 499l-170.74 0 69.96 361.89 100.78 -361.89zm-1517.04 0l-244.78 0 88.75 1078.78 156.03 -1078.78zm-1721.73 0l-118.88 0 57.79 489.65 61.09 -489.65zm-1884.74 0l-345.6 0 208.75 627.15 136.85 -627.15z"/>
+                    </svg>
+                </div>
+                <div class="header-text">
+                    <h1 class="header-title">TurboVoicer</h1>
+                    <p class="header-subtitle">Conversão de Voz Profissional</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <p class="header-description">
+                    Sua voz ou texto convertidos em narrações profissionais. Tecnologia inteligente de alta fidelidade para projetos de qualquer tamanho.
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="tv-container">
+        <!-- Left Column -->
+        <div class="tv-column-left">
+        <!-- ========== ETAPA 1: ROTEIRO ========== -->
+        <div class="tv-accordion-section" data-section="script" data-expanded="true">
+            <button class="tv-accordion-header" aria-expanded="true">
+                <div class="tv-accordion-title">
+                    <span class="tv-step-number">1</span>
+                    <svg class="tv-section-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <polyline points="10 9 9 9 8 9"/>
+                    </svg>
+                    <span>Roteiro</span>
+                </div>
+                <div class="tv-accordion-status">
+                    <span class="tv-status-badge pending" id="status-script">Pendente</span>
+                    <svg class="tv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+            </button>
+            <div class="tv-accordion-content">
+            <div class="tv-input-actions">
+                <button class="tv-btn tv-btn-secondary" id="tv-btn-load-txt">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="7 10 12 15 17 10"/>
+                        <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    Carregar TXT
+                </button>
+            </div>
+            <textarea 
+                id="tv-script-input" 
+                class="tv-textarea" 
+                placeholder="Digite ou cole seu roteiro aqui...&#10;&#10;O texto será automaticamente particionado em chunks para processamento otimizado."
+            ></textarea>
+            <div class="tv-char-counter">
+                <span id="tv-char-count">0</span> caracteres
+                <span id="tv-partition-preview" style="margin-left: 16px;"></span>
+            </div>
+            </div>
+        </div>
+
+        <!-- ========== ETAPA 2: FONTE DE ÁUDIO ========== -->
+        <div class="tv-accordion-section" data-section="audio-source" data-expanded="false">
+            <button class="tv-accordion-header" aria-expanded="false">
+                <div class="tv-accordion-title">
+                    <span class="tv-step-number">2</span>
+                    <svg class="tv-section-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                        <line x1="12" y1="19" x2="12" y2="23"/>
+                        <line x1="8" y1="23" x2="16" y2="23"/>
+                    </svg>
+                    <span>Fonte de Áudio</span>
+                </div>
+                <div class="tv-accordion-status">
+                    <span class="tv-status-badge optional" id="status-audio-source">Opcional</span>
+                    <svg class="tv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+            </button>
+            <div class="tv-accordion-content">
+            <div class="tv-audio-source-content">
+                <p class="tv-audio-source-description">
+                    Escolha a fonte de áudio que será usada como base para a conversão de voz:
+                </p>
+                
+                <!-- Radio Button: Texto (Edge TTS) -->
+                <div class="tv-audio-source-option">
+                    <input type="radio" id="tv-source-text" name="tv-audio-source" value="text" checked>
+                    <label for="tv-source-text" class="tv-audio-source-label">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="4 7 4 4 20 4 20 7"/>
+                            <line x1="9" y1="20" x2="15" y2="20"/>
+                            <line x1="12" y1="4" x2="12" y2="20"/>
+                        </svg>
+                        <span class="tv-source-title">Texto do Roteiro</span>
+                        <span class="tv-source-hint">Gera áudio a partir do roteiro usando Multilingual Neural</span>
+                    </label>
+                </div>
+                
+                <!-- Radio Button: Gravar Voz -->
+                <div class="tv-audio-source-option">
+                    <input type="radio" id="tv-source-recording" name="tv-audio-source" value="recording">
+                    <label for="tv-source-recording" class="tv-audio-source-label">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                            <line x1="12" y1="19" x2="12" y2="23"/>
+                            <line x1="8" y1="23" x2="16" y2="23"/>
+                        </svg>
+                        <span class="tv-source-title">Gravar Voz</span>
+                        <span class="tv-source-hint">Grave sua própria voz usando o microfone</span>
+                    </label>
+                    <div class="tv-source-controls" id="tv-recording-controls" style="display: none;">
+                        <div class="tv-recording-name-group">
+                            <label for="tv-recording-name">Nome da Gravação:</label>
+                            <input type="text" id="tv-recording-name" class="tv-recording-name-input" placeholder="minha_gravacao" value="gravacao">
+                            <span class="tv-recording-extension">.mp3</span>
+                        </div>
+                        <div class="tv-recording-actions">
+                            <button class="tv-btn tv-btn-record" id="tv-btn-record">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <circle cx="12" cy="12" r="10"/>
+                                </svg>
+                                Gravar
+                            </button>
+                            <button class="tv-btn tv-btn-secondary" id="tv-btn-stop-record" disabled>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <rect x="6" y="6" width="12" height="12"/>
+                                </svg>
+                                Parar
+                            </button>
+                            <button class="tv-btn tv-btn-secondary" id="tv-btn-preview-record" disabled>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon points="5 3 19 12 5 21 5 3"/>
+                                </svg>
+                                Preview
+                            </button>
+                        </div>
+                        <div class="tv-recording-info">
+                            <span class="tv-recording-timer" id="tv-recording-timer">00:00</span>
+                            <button class="tv-btn tv-btn-secondary tv-btn-small" id="tv-btn-choose-folder">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                                </svg>
+                                Escolher Pasta
+                            </button>
+                        </div>
+                        <div class="tv-recording-path" id="tv-recording-path">
+                            <span class="tv-path-label">Pasta:</span>
+                            <span class="tv-path-value" id="tv-recording-path-value">Nenhuma pasta selecionada</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Radio Button: Importar Áudio -->
+                <div class="tv-audio-source-option">
+                    <input type="radio" id="tv-source-import" name="tv-audio-source" value="import">
+                    <label for="tv-source-import" class="tv-audio-source-label">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        <span class="tv-source-title">Importar Áudio</span>
+                        <span class="tv-source-hint">Selecione um arquivo de áudio existente (MP3, WAV, OGG)</span>
+                    </label>
+                    <div class="tv-source-controls" id="tv-import-controls" style="display: none;">
+                        <div class="tv-import-actions">
+                            <button class="tv-btn tv-btn-primary" id="tv-btn-select-audio">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                                </svg>
+                                Selecionar Arquivo
+                            </button>
+                            <button class="tv-btn tv-btn-secondary" id="tv-btn-preview-import" disabled>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon points="5 3 19 12 5 21 5 3"/>
+                                </svg>
+                                Preview
+                            </button>
+                        </div>
+                        <div class="tv-import-info" id="tv-import-info" style="display: none;">
+                            <div class="tv-import-file">
+                                <span class="tv-file-label">Arquivo:</span>
+                                <span class="tv-file-value" id="tv-import-file-name">-</span>
+                            </div>
+                            <div class="tv-import-dest">
+                                <button class="tv-btn tv-btn-secondary tv-btn-small" id="tv-btn-choose-dest">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                                    </svg>
+                                    Pasta de Destino
+                                </button>
+                                <span class="tv-path-value" id="tv-import-dest-value">Mesma pasta do arquivo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Radio Button: Converter Pasta -->
+                <div class="tv-audio-source-option">
+                    <input type="radio" id="tv-source-batch" name="tv-audio-source" value="batch">
+                    <label for="tv-source-batch" class="tv-audio-source-label">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                            <circle cx="12" cy="13" r="2"/>
+                        </svg>
+                        <span class="tv-source-title">Converter Pasta</span>
+                        <span class="tv-source-hint">Converta múltiplos arquivos de áudio de uma pasta</span>
+                    </label>
+                    <div class="tv-source-controls" id="tv-batch-controls" style="display: none;">
+                        <div class="tv-batch-actions">
+                            <button class="tv-btn tv-btn-primary" id="tv-btn-select-batch-folder">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                                </svg>
+                                Selecionar Pasta
+                            </button>
+                        </div>
+                        <div class="tv-batch-options" style="margin-top: 12px;">
+                            <div class="tv-batch-option-row">
+                                <label class="tv-checkbox-label">
+                                    <input type="checkbox" id="tv-batch-include-subfolders" />
+                                    <span>Incluir subpastas</span>
+                                </label>
+                            </div>
+                            <div class="tv-batch-option-row" id="tv-batch-output-mode-container" style="display: none; margin-top: 8px;">
+                                <label style="display: block; margin-bottom: 4px; font-size: 13px; color: #999;">Modo de Saída:</label>
+                                <select id="tv-batch-output-mode" class="tv-select" style="width: 100%;">
+                                    <option value="individual">Converter arquivos individualmente</option>
+                                    <option value="concatenate">Concatenar por pasta (001+002+003...)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="tv-batch-info" id="tv-batch-info" style="display: none;">
+                            <div class="tv-batch-folder">
+                                <span class="tv-folder-label">Pasta:</span>
+                                <span class="tv-folder-value" id="tv-batch-folder-name">-</span>
+                            </div>
+                            <div class="tv-batch-files" id="tv-batch-files">
+                                <span class="tv-files-count">0 arquivos encontrados</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- ========== ETAPA 3: CONFIGURAÇÃO ========== -->
+        <div class="tv-accordion-section" data-section="configuration" data-expanded="false">
+            <button class="tv-accordion-header" aria-expanded="false">
+                <div class="tv-accordion-title">
+                    <span class="tv-step-number">3</span>
+                    <svg class="tv-section-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M12 2.69l1.45 1.45A2 2 0 0 0 14.86 5h2.07a2 2 0 0 1 2 2v2.07a2 2 0 0 0 .86 1.41L21.31 12l-1.45 1.45a2 2 0 0 0-.86 1.41v2.07a2 2 0 0 1-2 2h-2.07a2 2 0 0 0-1.41.86L12 21.31l-1.45-1.45a2 2 0 0 0-1.41-.86H7.07a2 2 0 0 1-2-2v-2.07a2 2 0 0 0-.86-1.41L2.69 12l1.45-1.45A2 2 0 0 0 5 9.14V7.07a2 2 0 0 1 2-2h2.07a2 2 0 0 0 1.41-.86L12 2.69z"/>
+                    </svg>
+                    <span>Configuração</span>
+                </div>
+                <div class="tv-accordion-status">
+                    <span class="tv-status-badge pending" id="status-configuration">Pendente</span>
+                    <svg class="tv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+            </button>
+            <div class="tv-accordion-content">
+            <div class="tv-config-grid">
+                <!-- Voz Base -->
+                <div class="tv-config-section">
+                    <label class="tv-label">Voz Base</label>
+                    <div class="tv-radio-group">
+                        <label class="tv-radio-option">
+                            <input type="radio" name="azure-voice" value="ava" checked>
+                            <span>Feminina - Multilingual</span>
+                        </label>
+                        <label class="tv-radio-option">
+                            <input type="radio" name="azure-voice" value="brian">
+                            <span>Masculina - Multilingual</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- RVC Voice -->
+                <div class="tv-config-section">
+                    <label class="tv-label">Voz de Destino</label>
+                    <select id="tv-rvc-voice" class="tv-select">
+                        <option value="">Carregando vozes...</option>
+                    </select>
+                    <button class="tv-btn tv-btn-secondary" id="tv-btn-manage-voices" onclick="window.location.href='voice-catalog.html'">
+                        Gerenciar Vozes
+                    </button>
+                </div>
+
+                <!-- Output Folder -->
+                <div class="tv-config-section">
+                    <label class="tv-label">Pasta de Saída</label>
+                    <div class="tv-input-group">
+                        <input 
+                            type="text" 
+                            id="tv-output-path" 
+                            class="tv-input" 
+                            placeholder="Selecione a pasta de saída..."
+                            readonly
+                        >
+                        <button class="tv-btn tv-btn-secondary" id="tv-btn-select-folder">
+                            Selecionar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- ========== ETAPA 4: CONTROLES DE ÁUDIO ========== -->
+        <div class="tv-accordion-section" data-section="audio-controls" data-expanded="false">
+            <button class="tv-accordion-header" aria-expanded="false">
+                <div class="tv-accordion-title">
+                    <span class="tv-step-number">4</span>
+                    <svg class="tv-section-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                    </svg>
+                    <span>Controles de Áudio</span>
+                </div>
+                <div class="tv-accordion-status">
+                    <span class="tv-status-badge optional" id="status-audio-controls">Opcional</span>
+                    <svg class="tv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+            </button>
+            <div class="tv-accordion-content">
+            <div class="tv-audio-controls">
+                <!-- Velocidade -->
+                <div class="tv-control-group">
+                    <label class="tv-label">
+                        Velocidade
+                        <span class="tv-control-value" id="tv-rate-value">1.0x</span>
+                        <span class="tv-tooltip" title="Afeta preview e voz final">ℹ️</span>
+                    </label>
+                    <input 
+                        type="range" 
+                        id="tv-rate-slider" 
+                        class="tv-slider"
+                        min="0.5" 
+                        max="2.0" 
+                        step="0.1" 
+                        value="1.0"
+                    >
+                    <div class="tv-slider-labels">
+                        <span>0.5x</span>
+                        <span>1.0x</span>
+                        <span>2.0x</span>
+                    </div>
+                    <p class="tv-control-hint">Controla a velocidade da fala (mais rápido ou mais lento)</p>
+                </div>
+                
+                <!-- Tom (afeta apenas RVC) -->
+                <div class="tv-control-group">
+                    <label class="tv-label">
+                        Tom (Semitons)
+                        <span class="tv-control-value" id="tv-pitch-value">0 st</span>
+                        <span class="tv-tooltip" title="Afeta apenas voz final">ℹ️</span>
+                    </label>
+                    <input 
+                        type="range" 
+                        id="tv-pitch-slider" 
+                        class="tv-slider"
+                        min="-12" 
+                        max="12" 
+                        step="1" 
+                        value="0"
+                    >
+                    <div class="tv-slider-labels">
+                        <span>-12</span>
+                        <span>0</span>
+                        <span>+12</span>
+                    </div>
+                    <p class="tv-control-hint">Ajusta o tom da voz (mais grave ou mais agudo)</p>
+                </div>
+                
+                <!-- Botão Resetar -->
+                <div class="tv-control-group">
+                    <button class="tv-btn tv-btn-secondary" id="tv-btn-reset-audio-controls">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="1 4 1 10 7 10"></polyline>
+                            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                        </svg>
+                        Resetar
+                    </button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- ========== ETAPA 5: PREVIEW DE VOZ PARA O ROTEIRO ========== -->
+        <div class="tv-accordion-section" data-section="preview" data-expanded="false">
+            <button class="tv-accordion-header" aria-expanded="false">
+                <div class="tv-accordion-title">
+                    <span class="tv-step-number">5</span>
+                    <svg class="tv-section-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="5 3 19 12 5 21 5 3"/>
+                    </svg>
+                    <span>Preview de Voz para o Roteiro</span>
+                </div>
+                <div class="tv-accordion-status">
+                    <span class="tv-status-badge optional" id="status-preview">Opcional</span>
+                    <svg class="tv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+            </button>
+            <div class="tv-accordion-content">
+            <div class="tv-preview-content">
+                <p class="tv-preview-description">
+                    Teste como ficará sua voz antes de gerar o roteiro completo:
+                </p>
+                
+                <div class="tv-preview-actions">
+                    <div class="tv-preview-buttons">
+                        <!-- Botão desativado temporariamente do layout da interface
+                        <button class="tv-btn tv-btn-preview-natural" id="tv-btn-preview-natural">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="5 3 19 12 5 21 5 3"/>
+                            </svg>
+                            <span class="tv-btn-content">
+                                <span class="tv-btn-label">Preview Natural</span>
+                                <span class="tv-btn-hint">1-2 segundos</span>
+                            </span>
+                        </button>
+                        -->
+                        
+                        <button class="tv-btn tv-btn-preview-processed" id="tv-btn-preview-processed">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                                <line x1="12" y1="19" x2="12" y2="23"/>
+                                <line x1="8" y1="23" x2="16" y2="23"/>
+                            </svg>
+                            <span class="tv-btn-content">
+                                <span class="tv-btn-label">Gerar Preview</span>
+                                <span class="tv-btn-hint">10-15 segundos</span>
+                            </span>
+                        </button>
+                    </div>
+                    
+                    <button class="tv-btn tv-btn-secondary tv-btn-clear-cache" id="tv-btn-clear-cache" style="display: none;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="3 6 5 6 21 6"/>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                        </svg>
+                        Limpar Cache
+                    </button>
+                </div>
+                
+                <div class="tv-preview-player" id="tv-preview-player" style="display: none;">
+                    <div class="tv-preview-status">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        <span>Preview gerado com sucesso!</span>
+                    </div>
+                    <audio id="tv-preview-audio" controls></audio>
+                    <div class="tv-preview-info">
+                        <span id="tv-preview-cache-info"></span>
+                    </div>
+                </div>
+                
+                <div class="tv-preview-loading" id="tv-preview-loading" style="display: none;">
+                    <div class="tv-spinner"></div>
+                    <p id="tv-preview-loading-text">Gerando preview...</p>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- ========== ETAPA 6: PRESETS DE CONFIGURAÇÃO ========== -->
+        <div class="tv-accordion-section" data-section="presets" data-expanded="false">
+            <button class="tv-accordion-header" aria-expanded="false">
+                <div class="tv-accordion-title">
+                    <span class="tv-step-number">6</span>
+                    <svg class="tv-section-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                        <polyline points="17 21 17 13 7 13 7 21"/>
+                        <polyline points="7 3 7 8 15 8"/>
+                    </svg>
+                    <span>Presets de Configuração</span>
+                </div>
+                <div class="tv-accordion-status">
+                    <span class="tv-status-badge optional" id="status-presets">Opcional</span>
+                    <svg class="tv-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+            </button>
+            <div class="tv-accordion-content">
+            <div class="tv-presets-content">
+                <p class="tv-presets-description">
+                    Salve suas configurações favoritas de voz para reutilizar rapidamente em projetos futuros.
+                </p>
+                
+                <div class="tv-presets-actions">
+                    <div class="tv-preset-selector">
+                        <label class="tv-label">Preset Atual</label>
+                        <select id="tv-preset-select" class="tv-select">
+                            <option value="">Nenhum preset selecionado</option>
+                        </select>
+                    </div>
+                    
+                    <div class="tv-preset-buttons">
+                        <button class="tv-btn tv-btn-primary" id="tv-btn-save-preset">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                                <polyline points="17 21 17 13 7 13 7 21"/>
+                                <polyline points="7 3 7 8 15 8"/>
+                            </svg>
+                            Salvar Preset
+                        </button>
+                        <button class="tv-btn tv-btn-secondary" id="tv-btn-load-preset" disabled>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            Aplicar
+                        </button>
+                        <button class="tv-btn tv-btn-secondary" id="tv-btn-delete-preset" disabled>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="3 6 5 6 21 6"/>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                            </svg>
+                            Excluir
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="tv-preset-import-export">
+                    <button class="tv-btn tv-btn-secondary" id="tv-btn-export-preset">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="17 8 12 3 7 8"/>
+                            <line x1="12" y1="3" x2="12" y2="15"/>
+                        </svg>
+                        Exportar Preset
+                    </button>
+                    <button class="tv-btn tv-btn-secondary" id="tv-btn-import-preset">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        Importar Preset
+                    </button>
+                    <button class="tv-btn tv-btn-secondary" id="tv-btn-export-all-presets">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                        </svg>
+                        Exportar Todos
+                    </button>
+                </div>
+                
+                <div class="tv-preset-info" id="tv-preset-info" style="display: none;">
+                    <div class="tv-preset-details">
+                        <h4>Detalhes do Preset</h4>
+                        <div class="tv-preset-detail-grid">
+                            <div class="tv-preset-detail-item">
+                                <span class="tv-preset-detail-label">Nome:</span>
+                                <span class="tv-preset-detail-value" id="tv-preset-name"></span>
+                            </div>
+                            <div class="tv-preset-detail-item">
+                                <span class="tv-preset-detail-label">Voz Base:</span>
+                                <span class="tv-preset-detail-value" id="tv-preset-edge-voice"></span>
+                            </div>
+                            <div class="tv-preset-detail-item">
+                                <span class="tv-preset-detail-label">Voz RVC:</span>
+                                <span class="tv-preset-detail-value" id="tv-preset-rvc-voice"></span>
+                            </div>
+                            <div class="tv-preset-detail-item">
+                                <span class="tv-preset-detail-label">Pitch Edge:</span>
+                                <span class="tv-preset-detail-value" id="tv-preset-pitch"></span>
+                            </div>
+                            <div class="tv-preset-detail-item">
+                                <span class="tv-preset-detail-label">Rate:</span>
+                                <span class="tv-preset-detail-value" id="tv-preset-rate"></span>
+                            </div>
+                            <div class="tv-preset-detail-item">
+                                <span class="tv-preset-detail-label">Pitch RVC:</span>
+                                <span class="tv-preset-detail-value" id="tv-preset-rvc-pitch"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Hardware Detection Panel -->
+        <div class="tv-panel" id="tv-hardware-panel">
+            <h2 class="tv-panel-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                    <line x1="8" y1="21" x2="16" y2="21"/>
+                    <line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+                Hardware Detectado
+            </h2>
+            <div class="tv-hardware-content">
+                <div class="tv-hardware-info" id="tv-hardware-info">
+                    <div class="tv-hw-loading">
+                        <div class="tv-spinner"></div>
+                        <p>Detectando hardware...</p>
+                    </div>
+                </div>
+                
+                <!-- Manual Override -->
+                <div class="tv-hardware-override">
+                    <label class="tv-label">
+                        <input type="checkbox" id="tv-manual-override" class="tv-checkbox">
+                        Configuração Manual
+                    </label>
+                    <div class="tv-override-controls" id="tv-override-controls" style="display: none;">
+                        <label class="tv-label">Método de Processamento</label>
+                        <select id="tv-method-select" class="tv-select">
+                            <option value="auto">Automático (Recomendado)</option>
+                            <option value="rmvpe">GPU - RMVPE (Rápido, 128kbps)</option>
+                            <option value="pm">CPU - PM (Moderado, 96kbps)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Status Panel -->
+        <div class="tv-panel">
+            <h2 class="tv-panel-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                    <polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+                Status do Sistema
+            </h2>
+            <div class="tv-status-content">
+                <p class="tv-status-description">
+                    Verifique se os componentes estão funcionando corretamente antes de gerar áudio.
+                </p>
+                
+                <div class="tv-status-grid">
+                    <!-- TTS Neural Status -->
+                    <div class="tv-status-item">
+                        <div class="tv-status-header">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                            </svg>
+                            <h3>TTS Neural</h3>
+                            <span class="tv-status-badge" id="tv-edge-status-badge">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                </svg>
+                                Não testado
+                            </span>
+                        </div>
+                        <p class="tv-status-message" id="tv-edge-status-message">Clique em "Testar" para verificar</p>
+                        <button class="tv-btn tv-btn-secondary tv-btn-sm" id="tv-btn-test-edge">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="5 3 19 12 5 21 5 3"/>
+                            </svg>
+                            Testar TTS Neural
+                        </button>
+                    </div>
+                    
+                    <!-- RVC Status -->
+                    <div class="tv-status-item">
+                        <div class="tv-status-header">
+                            <svg width="20" height="20" viewBox="0 0 10637.44 8067.79" fill="currentColor">
+                                <path d="M249.5 4742.48c-137.79,0 -249.5,-111.71 -249.5,-249.5 0,-137.79 111.71,-249.5 249.5,-249.5l2192.72 0 720.12 -3300.33 491.21 23.38 386.77 3276.94 240.02 0 529.37 -4243.48 496.08 10.72 348.21 4232.76 358 0 292.82 -2024.63 491.21 -11.7 393.64 2036.33 406.16 0 442.13 -1587.66 470.74 -27.29 653.74 1614.94 1225.51 0c137.79,0 249.5,111.71 249.5,249.5 0,137.79 -111.71,249.5 -249.5,249.5l-2414.67 0 -421.39 1513.15 -484.38 -19.49 -288.74 -1493.66 -335.65 0 -480.95 3325.32 -495.1 -15.6 -272.28 -3309.72 -474.07 0 -322.96 2588.94 -495.11 -0.97 -305.46 -2587.97 -753.59 0 -353.01 1617.9 -479.51 25.35 -546.95 -1643.25 -1214.63 0zm2702.98 -499l585.82 0 -205.65 -1742.34 -380.17 1742.34zm1830.49 0l370.77 0 -147.34 -1791 -223.42 1791zm1732.32 0l167.02 0 -95.54 -494.23 -71.48 494.23zm1596.94 0l512.47 0 -303.61 -750.01 -208.86 750.01zm-655.38 499l-170.74 0 69.96 361.89 100.78 -361.89zm-1517.04 0l-244.78 0 88.75 1078.78 156.03 -1078.78zm-1721.73 0l-118.88 0 57.79 489.65 61.09 -489.65zm-1884.74 0l-345.6 0 208.75 627.15 136.85 -627.15z"/>
+                            </svg>
+                            <h3>Conversão</h3>
+                            <span class="tv-status-badge" id="tv-rvc-status-badge">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                </svg>
+                                Não testado
+                            </span>
+                        </div>
+                        <p class="tv-status-message" id="tv-rvc-status-message">Clique em "Testar" para verificar</p>
+                        <button class="tv-btn tv-btn-secondary tv-btn-sm" id="tv-btn-test-rvc">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="5 3 19 12 5 21 5 3"/>
+                            </svg>
+                            Testar Engine
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="tv-status-actions">
+                    <button class="tv-btn tv-btn-primary" id="tv-btn-test-all">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        Testar Todos os Componentes
+                    </button>
+                    <button class="tv-btn tv-btn-secondary" id="tv-btn-reinstall-engine" title="Reinstala o motor de conversão de voz (útil se houver erros)">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+                        </svg>
+                        Reinstalar Motor
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Usage Warning Panel -->
+        <div class="tv-panel tv-warning-panel tv-full-width" id="tv-warning-panel" style="display: none;">
+            <div class="tv-warning-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+            </div>
+            <div class="tv-warning-content">
+                <h3>Atenção: Alto Uso de Recursos</h3>
+                <p id="tv-warning-message">
+                    O TurboVoicer utiliza processamento intensivo de CPU/GPU durante a conversão de voz.
+                </p>
+                <ul id="tv-warning-tips">
+                    <li>Evite executar outras tarefas pesadas durante o processamento</li>
+                    <li>Feche programas desnecessários para melhor performance</li>
+                    <li>O tempo de processamento varia conforme o hardware</li>
+                </ul>
+            </div>
+        </div>
+        </div>
+        <!-- End Left Column -->
+
+        <!-- Right Column -->
+        <div class="tv-column-right">
+        <!-- Partitions Panel -->
+        <div class="tv-panel" id="tv-partitions-panel">
+            <h2 class="tv-panel-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="8" y1="6" x2="21" y2="6"/>
+                    <line x1="8" y1="12" x2="21" y2="12"/>
+                    <line x1="8" y1="18" x2="21" y2="18"/>
+                    <line x1="3" y1="6" x2="3.01" y2="6"/>
+                    <line x1="3" y1="12" x2="3.01" y2="12"/>
+                    <line x1="3" y1="18" x2="3.01" y2="18"/>
+                </svg>
+                Partições
+            </h2>
+            <div id="tv-partitions-list" class="tv-partitions-list">
+                <!-- Partitions will be dynamically added here -->
+            </div>
+        </div>
+
+        <!-- Action Controls (Right Column) -->
+        <div class="tv-actions-right">
+            <div class="tv-output-name-group">
+                <label for="tv-output-name">Nome do Arquivo:</label>
+                <input type="text" id="tv-output-name" class="tv-output-name-input" placeholder="Ex: TurboVoicer" value="">
+                <span class="tv-output-extension">.mp3</span>
+            </div>
+            <div class="tv-action-buttons">
+                <button class="tv-btn tv-btn-secondary" id="tv-btn-clear">
+                    Limpar Tudo
+                </button>
+                <button class="tv-btn tv-btn-primary" id="tv-btn-generate">
+                    Gerar Áudio
+                </button>
+                <button class="tv-btn tv-btn-secondary" id="tv-btn-cancel" style="display: none;">
+                    Cancelar
+                </button>
+            </div>
+
+            <!-- Progress Bar (Hidden by default) -->
+            <div class="tv-progress-container" id="tv-progress-container" style="display: none;">
+                <div class="tv-progress-header">
+                    <span id="tv-progress-message">Processando...</span>
+                    <span id="tv-progress-percentage">0%</span>
+                </div>
+                <div class="tv-progress-bar">
+                    <div class="tv-progress-fill" id="tv-progress-fill" style="width: 0%"></div>
+                </div>
+                <div class="tv-progress-details">
+                    <span id="tv-progress-partition">Partição 0/0</span>
+                    <span id="tv-progress-status"></span>
+                </div>
+            </div>
+        </div>
+
+        </div>
+        <!-- End Right Column -->
+    </div>
+    <!-- End Container -->
+
+    <!-- Scripts -->
+    <script src="js/electron-api-client.js"></script>
+    <script src="js/modal-system.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/text-partitioner.js"></script>
+    <script src="js/audio-recorder.js"></script>
+    <script src="js/audio-source-manager.js"></script>
+    <script src="js/preview-manager.js"></script>
+    <script src="js/preset-manager.js"></script>
+    <script src="js/validation-manager.js"></script>
+    <script src="js/test-manager.js"></script>
+    <script src="js/installer-ui.js"></script>
+    <script src="js/gpu-ui.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

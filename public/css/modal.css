@@ -1,0 +1,124 @@
+/* TurboVoicer - Modal System CSS */
+/* Padrão TurboStudio */
+
+.tv-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+}
+
+.tv-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+}
+
+.tv-modal-content {
+    position: relative;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 12px;
+    min-width: 400px;
+    max-width: 600px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tv-modal-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 24px;
+    border-bottom: 1px solid #333;
+}
+
+.tv-modal-icon {
+    font-size: 32px;
+    line-height: 1;
+}
+
+.tv-modal-header h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.tv-modal-body {
+    padding: 24px;
+}
+
+.tv-modal-message {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #e6e6e6;
+}
+
+.tv-modal-extra {
+    margin-top: 16px;
+}
+
+.tv-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 16px 24px;
+    border-top: 1px solid #333;
+}
+
+.tv-btn-modal {
+    padding: 10px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tv-btn-primary {
+    background: #FF0033;
+    color: #fff;
+}
+
+.tv-btn-primary:hover {
+    background: #CC0029;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 0, 51, 0.3);
+}
+
+.tv-btn-secondary {
+    background: #333;
+    color: #fff;
+}
+
+.tv-btn-secondary:hover {
+    background: #444;
+    transform: translateY(-1px);
+}
+
+.tv-btn-modal:active {
+    transform: translateY(0);
+}

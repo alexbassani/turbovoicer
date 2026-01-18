@@ -1,0 +1,361 @@
+/* Partitions Panel - Isolated Component */
+/* Copied from TurboTTS (Golden Rule #3: Copy, Don't Share) */
+/* Adapted for TurboVoicer with tv- prefix */
+
+/* Partitions Container */
+#tv-partitions-panel {
+    margin-bottom: 24px;
+}
+
+.tv-partitions-list {
+    max-height: 600px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Partition Item Wrapper */
+.tv-partition-wrapper {
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    padding: 12px;
+    background: #0d0d0d;
+    margin-bottom: 8px;
+}
+
+/* Partition Item Grid */
+.tv-partition-item {
+    display: grid;
+    grid-template-columns: 56px 1fr 40px;
+    gap: 12px;
+    align-items: start;
+}
+
+/* Partition Number Badge */
+.tv-part-number {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #ff0033 0%, #cc0028 100%);
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(255, 0, 51, 0.3);
+}
+
+/* Partition Text Area */
+.tv-part-text {
+    width: 100%;
+    min-height: 84px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 12px;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    resize: vertical;
+}
+
+.tv-part-text:read-only {
+    cursor: default;
+    opacity: 0.9;
+}
+
+.tv-part-text:not(:read-only) {
+    border-color: #ff0033;
+    box-shadow: 0 0 0 2px rgba(255, 0, 51, 0.2);
+}
+
+.tv-part-text:focus {
+    outline: none;
+    border-color: #ff0033;
+    box-shadow: 0 0 0 2px rgba(255, 0, 51, 0.3);
+}
+
+/* Partition Side Actions */
+.tv-part-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Status Icons */
+.tv-status-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.tv-status-pending {
+    background: #333;
+    color: #666;
+}
+
+.tv-status-pending::before {
+    content: '⏱️';
+}
+
+.tv-status-processing {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: #000;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.tv-status-processing::before {
+    content: '⚙️';
+}
+
+.tv-status-completed {
+    background: linear-gradient(135deg, #00ff88 0%, #00cc66 100%);
+    color: #000;
+}
+
+.tv-status-completed::before {
+    content: '✓';
+}
+
+.tv-status-error {
+    background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
+    color: #fff;
+}
+
+.tv-status-error::before {
+    content: '✗';
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+/* Progress Bar */
+.tv-part-progress {
+    width: 100%;
+    height: 4px;
+    background: #222;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+.tv-part-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #ff0033 0%, #ff3366 100%);
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+/* Audio Player Container */
+.tv-part-audio {
+    margin-top: 12px;
+    padding: 12px;
+    background: #0d0d0d;
+    border: 1px solid #222;
+    border-radius: 6px;
+}
+
+.tv-part-audio audio {
+    width: 100%;
+    height: 40px;
+}
+
+/* Custom Audio Player Styling */
+.tv-part-audio audio::-webkit-media-controls-panel {
+    background: #1a1a1a;
+}
+
+.tv-part-audio audio::-webkit-media-controls-play-button,
+.tv-part-audio audio::-webkit-media-controls-pause-button {
+    background-color: #ff0033;
+    border-radius: 50%;
+}
+
+/* Error Message */
+.tv-part-error {
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: rgba(255, 68, 68, 0.1);
+    border: 1px solid rgba(255, 68, 68, 0.3);
+    border-radius: 4px;
+    color: #ff4444;
+    font-size: 12px;
+}
+
+/* Partition Actions */
+.tv-part-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #222;
+}
+
+.tv-part-btn {
+    padding: 6px 12px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tv-part-btn:hover {
+    background: #222;
+    border-color: #ff0033;
+}
+
+.tv-part-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.tv-part-btn-play {
+    background: linear-gradient(135deg, #ff0033 0%, #cc0028 100%);
+    border-color: #ff0033;
+}
+
+.tv-part-btn-play:hover {
+    background: linear-gradient(135deg, #ff3355 0%, #ff0033 100%);
+}
+
+/* Overall Progress */
+.tv-overall-progress {
+    margin-bottom: 16px;
+    padding: 16px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+}
+
+.tv-overall-progress h4 {
+    margin: 0 0 12px 0;
+    font-size: 14px;
+    color: #fff;
+}
+
+.tv-overall-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.tv-overall-stat {
+    text-align: center;
+}
+
+.tv-overall-stat-label {
+    font-size: 11px;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.tv-overall-stat-value {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.tv-overall-stat-value.pending {
+    color: #666;
+}
+
+.tv-overall-stat-value.processing {
+    color: #4facfe;
+}
+
+.tv-overall-stat-value.completed {
+    color: #00ff88;
+}
+
+.tv-overall-stat-value.errors {
+    color: #ff4444;
+}
+
+.tv-overall-progress-bar-container {
+    width: 100%;
+    height: 8px;
+    background: #222;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.tv-overall-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #ff0033 0%, #00ff88 100%);
+    transition: width 0.5s ease;
+    border-radius: 4px;
+}
+
+/* Empty State */
+.tv-partitions-empty {
+    padding: 40px;
+    text-align: center;
+    color: #666;
+}
+
+.tv-partitions-empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.tv-partitions-empty-text {
+    font-size: 14px;
+}
+
+/* Scrollbar Styling */
+.tv-partitions-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.tv-partitions-list::-webkit-scrollbar-track {
+    background: #0d0d0d;
+    border-radius: 4px;
+}
+
+.tv-partitions-list::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+.tv-partitions-list::-webkit-scrollbar-thumb:hover {
+    background: #444;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .tv-partition-item {
+        grid-template-columns: 40px 1fr;
+        gap: 8px;
+    }
+
+    .tv-part-number {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .tv-part-side {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .tv-overall-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

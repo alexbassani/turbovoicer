@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Vozes - TurboVoicer</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/voice-catalog.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <div class="header-content">
+            <div class="header-left">
+                <button class="tv-btn-back" id="btn-back-to-main">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Voltar
+                </button>
+                <div class="header-icon">
+                    <svg viewBox="0 0 10637.44 8067.79" fill="currentColor">
+                        <path d="M249.5 4742.48c-137.79,0 -249.5,-111.71 -249.5,-249.5 0,-137.79 111.71,-249.5 249.5,-249.5l2192.72 0 720.12 -3300.33 491.21 23.38 386.77 3276.94 240.02 0 529.37 -4243.48 496.08 10.72 348.21 4232.76 358 0 292.82 -2024.63 491.21 -11.7 393.64 2036.33 406.16 0 442.13 -1587.66 470.74 -27.29 653.74 1614.94 1225.51 0c137.79,0 249.5,111.71 249.5,249.5 0,137.79 -111.71,249.5 -249.5,249.5l-2414.67 0 -421.39 1513.15 -484.38 -19.49 -288.74 -1493.66 -335.65 0 -480.95 3325.32 -495.1 -15.6 -272.28 -3309.72 -474.07 0 -322.96 2588.94 -495.11 -0.97 -305.46 -2587.97 -753.59 0 -353.01 1617.9 -479.51 25.35 -546.95 -1643.25 -1214.63 0zm2702.98 -499l585.82 0 -205.65 -1742.34 -380.17 1742.34zm1830.49 0l370.77 0 -147.34 -1791 -223.42 1791zm1732.32 0l167.02 0 -95.54 -494.23 -71.48 494.23zm1596.94 0l512.47 0 -303.61 -750.01 -208.86 750.01zm-655.38 499l-170.74 0 69.96 361.89 100.78 -361.89zm-1517.04 0l-244.78 0 88.75 1078.78 156.03 -1078.78zm-1721.73 0l-118.88 0 57.79 489.65 61.09 -489.65zm-1884.74 0l-345.6 0 208.75 627.15 136.85 -627.15z"/>
+                    </svg>
+                </div>
+                <div class="header-text">
+                    <h1 class="header-title">Catálogo de Vozes</h1>
+                    <p class="header-subtitle">TurboVoicer</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <p class="header-description">
+                    Navegue, baixe e gerencie suas vozes TurboVoicer. Importe vozes customizadas ou escolha do catálogo online.
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="vc-container">
+        <!-- Toolbar -->
+        <div class="vc-toolbar">
+            <div class="vc-search">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.35-4.35"/>
+                </svg>
+                <input 
+                    type="text" 
+                    id="vc-search-input" 
+                    placeholder="Buscar vozes..."
+                    class="vc-search-input"
+                >
+            </div>
+            
+            <div class="vc-filters">
+                <button class="vc-filter-btn active" data-filter="all">
+                    Todas
+                </button>
+                <button class="vc-filter-btn" data-filter="installed">
+                    Instaladas
+                </button>
+                <button class="vc-filter-btn" data-filter="favorites">
+                    ⭐ Favoritas
+                </button>
+            </div>
+
+            <button class="tv-btn tv-btn-primary" id="btn-import-voice">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="17 8 12 3 7 8"/>
+                    <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+                Importar Voz
+            </button>
+        </div>
+
+        <!-- Categories Grid -->
+        <div class="vc-categories" id="vc-categories">
+            <!-- Categories will be dynamically loaded -->
+            <div class="vc-loading">
+                <div class="vc-spinner"></div>
+                <p>Carregando catálogo...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Download Progress Modal -->
+    <div class="vc-modal" id="vc-download-modal" style="display: none;">
+        <div class="vc-modal-backdrop"></div>
+        <div class="vc-modal-content vc-modal-small">
+            <div class="vc-modal-header">
+                <h3>Baixando Voz</h3>
+            </div>
+            <div class="vc-modal-body">
+                <div class="vc-download-info">
+                    <p id="vc-download-voice-name">Carregando...</p>
+                    <p id="vc-download-stage">Preparando download...</p>
+                </div>
+                <div class="vc-progress-bar">
+                    <div class="vc-progress-fill" id="vc-download-progress"></div>
+                </div>
+                <p class="vc-progress-text" id="vc-download-percent">0%</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import Voice Modal -->
+    <div class="vc-modal" id="vc-import-modal" style="display: none;">
+        <div class="vc-modal-backdrop"></div>
+        <div class="vc-modal-content vc-modal-small">
+            <div class="vc-modal-header">
+                <h3>Importar Voz Customizada</h3>
+                <button class="vc-modal-close" id="btn-close-import">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="vc-modal-body">
+                <div class="vc-import-form">
+                    <label class="tv-label">Nome da Voz</label>
+                    <input 
+                        type="text" 
+                        id="vc-import-name" 
+                        class="tv-input" 
+                        placeholder="Ex: Minha Voz Customizada"
+                    >
+                    
+                    <div class="vc-import-file">
+                        <button class="tv-btn tv-btn-secondary" id="btn-select-zip">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="17 8 12 3 7 8"/>
+                                <line x1="12" y1="3" x2="12" y2="15"/>
+                            </svg>
+                            Selecionar arquivo .zip
+                        </button>
+                        <p id="vc-import-file-name" class="vc-import-file-name">Nenhum arquivo selecionado</p>
+                    </div>
+                </div>
+            </div>
+            <div class="vc-modal-footer">
+                <button class="tv-btn tv-btn-secondary" id="btn-cancel-import">
+                    Cancelar
+                </button>
+                <button class="tv-btn tv-btn-primary" id="btn-confirm-import" disabled>
+                    Importar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirm Modal -->
+    <div class="vc-modal" id="vc-confirm-modal" style="display: none;">
+        <div class="vc-modal-backdrop"></div>
+        <div class="vc-modal-content vc-modal-small">
+            <div class="vc-modal-header">
+                <h3 id="vc-confirm-title">Confirmar</h3>
+            </div>
+            <div class="vc-modal-body">
+                <p id="vc-confirm-message" style="white-space: pre-wrap; line-height: 1.6;"></p>
+            </div>
+            <div class="vc-modal-footer">
+                <button class="tv-btn tv-btn-secondary" id="vc-confirm-cancel">
+                    Cancelar
+                </button>
+                <button class="tv-btn tv-btn-danger" id="vc-confirm-ok">
+                    Confirmar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success/Error Modal -->
+    <div class="vc-modal" id="vc-alert-modal" style="display: none;">
+        <div class="vc-modal-backdrop"></div>
+        <div class="vc-modal-content vc-modal-small">
+            <div class="vc-modal-header">
+                <h3 id="vc-alert-title">Aviso</h3>
+            </div>
+            <div class="vc-modal-body">
+                <p id="vc-alert-message" style="white-space: pre-wrap; line-height: 1.6;"></p>
+            </div>
+            <div class="vc-modal-footer">
+                <button class="tv-btn tv-btn-primary" id="vc-alert-ok">
+                    OK
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Premium Authentication Modal -->
+    <div class="vc-modal" id="vc-premium-modal" style="display: none;">
+        <div class="vc-modal-backdrop"></div>
+        <div class="vc-modal-content vc-modal-small">
+            <div class="vc-modal-header">
+                <div class="vc-premium-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#FF0033" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                </div>
+                <h3>Acessar Vozes Premium</h3>
+                <button class="vc-modal-close" id="btn-close-premium">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="vc-modal-body">
+                <div class="vc-premium-form">
+                    <p class="vc-premium-description">
+                        Digite o usuário e senha do Pack de Vozes Full para desbloquear todas as vozes premium.
+                    </p>
+                    
+                    <label class="tv-label">Usuário Premium</label>
+                    <input 
+                        type="text" 
+                        id="vc-premium-username" 
+                        class="tv-input" 
+                        placeholder="Digite o usuário..."
+                        autocomplete="off"
+                    >
+                    
+                    <label class="tv-label">Senha Premium</label>
+                    <div class="vc-password-wrapper">
+                        <input 
+                            type="password" 
+                            id="vc-premium-password" 
+                            class="tv-input" 
+                            placeholder="Digite a senha..."
+                            autocomplete="off"
+                        >
+                        <button type="button" class="vc-toggle-password" id="vc-toggle-password" title="Mostrar/Ocultar senha">
+                            <svg class="vc-eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                            <svg class="vc-eye-off-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+                                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                                <line x1="1" y1="1" x2="23" y2="23"/>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div class="vc-premium-hint">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="16" x2="12" y2="12"/>
+                            <line x1="12" y1="8" x2="12.01" y2="8"/>
+                        </svg>
+                        <p>
+                            <strong>Onde encontrar o usuário e senha?</strong><br>
+                            Os dados de acesso estão na aula <strong>"SENHA PACK DE VOZES FULL"</strong><br>
+                            liberada 7 dias após sua compra na Kiwify.
+                        </p>
+                    </div>
+                    
+                    <div class="vc-premium-error" id="vc-premium-error" style="display: none;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="15" y1="9" x2="9" y2="15"/>
+                            <line x1="9" y1="9" x2="15" y2="15"/>
+                        </svg>
+                        <p id="vc-premium-error-text">Senha incorreta. Verifique a aula na Kiwify.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="vc-modal-footer">
+                <button class="tv-btn tv-btn-secondary" id="btn-cancel-premium">
+                    Cancelar
+                </button>
+                <button class="tv-btn tv-btn-primary" id="btn-unlock-premium">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 0 1 9.9-1"/>
+                    </svg>
+                    Desbloquear
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/electron-api-client.js"></script>
+    <script src="js/voice-catalog.js"></script>
+</body>
+</html>

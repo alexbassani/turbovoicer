@@ -1,0 +1,144 @@
+/**
+ * Preview Buttons Styles - TurboVoicer
+ * Estilos isolados para os botões de preview (Natural e Processado)
+ */
+
+/* Container dos botões de preview */
+.tv-preview-buttons {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+/* Base dos botões de preview */
+.tv-btn-preview-natural,
+.tv-btn-preview-processed {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Conteúdo do botão (label + hint) */
+.tv-btn-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+}
+
+.tv-btn-label {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.tv-btn-hint {
+    font-size: 11px;
+    opacity: 0.8;
+    font-weight: 400;
+    line-height: 1;
+}
+
+/* Preview Natural - Azul */
+.tv-btn-preview-natural {
+    background: linear-gradient(135deg, #0A84FF 0%, #0066CC 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(10, 132, 255, 0.3);
+}
+
+.tv-btn-preview-natural:hover {
+    background: linear-gradient(135deg, #0066CC 0%, #0052A3 100%);
+    box-shadow: 0 4px 12px rgba(10, 132, 255, 0.4);
+    transform: translateY(-1px);
+}
+
+.tv-btn-preview-natural:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(10, 132, 255, 0.3);
+}
+
+.tv-btn-preview-natural:disabled {
+    background: #555;
+    cursor: not-allowed;
+    opacity: 0.5;
+    box-shadow: none;
+}
+
+/* Preview Processado - Vermelho */
+.tv-btn-preview-processed {
+    background: linear-gradient(135deg, #FF0033 0%, #CC0029 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(255, 0, 51, 0.3);
+}
+
+.tv-btn-preview-processed:hover {
+    background: linear-gradient(135deg, #CC0029 0%, #A3001F 100%);
+    box-shadow: 0 4px 12px rgba(255, 0, 51, 0.4);
+    transform: translateY(-1px);
+}
+
+.tv-btn-preview-processed:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(255, 0, 51, 0.3);
+}
+
+.tv-btn-preview-processed:disabled {
+    background: #555;
+    cursor: not-allowed;
+    opacity: 0.5;
+    box-shadow: none;
+}
+
+/* Ícones SVG dos botões */
+.tv-btn-preview-natural svg,
+.tv-btn-preview-processed svg {
+    flex-shrink: 0;
+}
+
+/* Botão de limpar cache */
+.tv-btn-clear-cache {
+    margin-top: 8px;
+}
+
+/* Tooltip para controles */
+.tv-tooltip {
+    cursor: help;
+    margin-left: 6px;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.tv-tooltip:hover {
+    opacity: 1;
+}
+
+/* Hint abaixo dos sliders */
+.tv-control-hint {
+    font-size: 12px;
+    color: #888;
+    margin-top: 6px;
+    margin-bottom: 0;
+    line-height: 1.4;
+}
+
+/* Responsivo - Mobile */
+@media (max-width: 768px) {
+    .tv-preview-buttons {
+        flex-direction: column;
+    }
+    
+    .tv-btn-preview-natural,
+    .tv-btn-preview-processed {
+        width: 100%;
+    }
+}

@@ -1,0 +1,300 @@
+/**
+ * TurboVoicer - UI Improvements
+ * Data: 15/01/2026
+ * Melhorias visuais baseadas no Design System do TurboStudio
+ * 
+ * IMPORTANTE: Este arquivo contém APENAS melhorias visuais (CSS)
+ * Não altera estrutura HTML ou funcionalidades
+ */
+
+/* ========================================
+   1. PADRONIZAÇÃO DE ESPAÇAMENTO
+   ======================================== */
+
+/* Acordeões - padronizar margin-bottom */
+.tv-accordion-section {
+    margin-bottom: 20px !important;
+}
+
+/* Gaps internos - padronizar para 20px */
+.tv-audio-controls,
+.tv-preview-content,
+.tv-presets-content {
+    gap: 20px !important;
+}
+
+/* ========================================
+   2. PADRONIZAÇÃO DE BORDER-RADIUS
+   ======================================== */
+
+/* Elementos principais - 8px (padrão TurboStudio) */
+.tv-radio-option,
+.tv-select,
+.tv-input,
+.tv-btn,
+.tv-textarea,
+.tv-partition-item,
+.tv-audio-section,
+.tv-hardware-info,
+.tv-status-item,
+.tv-preview-player,
+.tv-preview-loading,
+.tv-preset-info {
+    border-radius: 8px !important;
+}
+
+/* Elementos pequenos - 6px */
+.tv-partition-status,
+.tv-status-badge {
+    border-radius: 6px !important;
+}
+
+/* ========================================
+   3. PADRONIZAÇÃO DE PADDING EM BOTÕES
+   ======================================== */
+
+/* Botão padrão - 12px 24px (padrão TurboStudio) */
+.tv-btn {
+    padding: 12px 24px !important;
+}
+
+/* Botão pequeno */
+.tv-btn-sm {
+    padding: 8px 16px !important;
+    font-size: 13px !important;
+}
+
+/* Botão grande */
+.tv-btn-lg {
+    padding: 16px 32px !important;
+    font-size: 16px !important;
+}
+
+/* Botões de preview mantêm padding especial */
+.tv-btn-preview-natural,
+.tv-btn-preview-processed {
+    padding: 16px 20px !important;
+}
+
+/* ========================================
+   4. ALINHAMENTO DE BOTÕES
+   ======================================== */
+
+/* Botão "Gerenciar Vozes" - adicionar espaçamento */
+.tv-config-section .tv-btn {
+    margin-top: 12px;
+}
+
+/* Botões de Preset - grid organizado */
+.tv-preset-buttons {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
+    gap: 12px !important;
+}
+
+.tv-preset-buttons .tv-btn {
+    width: 100%;
+    justify-content: center;
+}
+
+/* Botões de Import/Export - grid organizado */
+.tv-preset-import-export {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)) !important;
+    gap: 12px !important;
+}
+
+.tv-preset-import-export .tv-btn {
+    width: 100%;
+    justify-content: center;
+}
+
+/* ========================================
+   5. CARDS/BOXES - ESTRUTURA INTERNA
+   ======================================== */
+
+/* Conteúdo de painéis - estrutura clara */
+.tv-hardware-content,
+.tv-status-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Hardware Info - box interno */
+.tv-hardware-info {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    padding: 16px;
+}
+
+/* Status Grid - grid organizado */
+.tv-status-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    gap: 16px !important;
+    margin-bottom: 20px;
+}
+
+/* Status Item - estrutura interna */
+.tv-status-item {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.tv-status-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.tv-status-header h3 {
+    flex: 1;
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: #e0e0e0;
+}
+
+.tv-status-header svg {
+    flex-shrink: 0;
+}
+
+.tv-status-message {
+    font-size: 13px;
+    color: #999;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* ========================================
+   6. BOTÕES DE AÇÃO (COLUNA DIREITA)
+   ======================================== */
+
+/* Action Buttons - hierarquia visual clara */
+.tv-action-buttons {
+    display: grid !important;
+    grid-template-columns: auto 1fr !important;
+    gap: 12px !important;
+    margin-top: 20px !important;
+}
+
+.tv-action-buttons .tv-btn-primary {
+    grid-column: 2;
+}
+
+.tv-action-buttons .tv-btn-secondary {
+    grid-column: 1;
+    min-width: 120px;
+}
+
+/* Botão Cancelar - full width quando visível */
+.tv-action-buttons .tv-btn-secondary:only-child {
+    grid-column: 1 / -1;
+}
+
+/* ========================================
+   7. HIERARQUIA VISUAL - TÍTULOS
+   ======================================== */
+
+/* Títulos de painel - reduzir tamanho */
+.tv-panel-title {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    margin: 0 0 16px 0 !important;
+    color: #e0e0e0 !important;
+}
+
+/* Acordeões mantêm destaque */
+.tv-accordion-title {
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    color: #e0e0e0 !important;
+}
+
+/* ========================================
+   8. INPUT GROUP - ESPAÇAMENTO
+   ======================================== */
+
+/* Input Group - aumentar gap */
+.tv-input-group {
+    gap: 12px !important;
+}
+
+.tv-input-group .tv-btn {
+    min-width: 120px;
+}
+
+/* ========================================
+   9. PREVIEW ACTIONS - ORGANIZAÇÃO
+   ======================================== */
+
+/* Preview Actions - layout vertical */
+.tv-preview-actions {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+}
+
+.tv-preview-buttons {
+    display: flex !important;
+    gap: 12px !important;
+    width: 100% !important;
+}
+
+.tv-btn-clear-cache {
+    align-self: flex-start;
+    margin-top: 8px !important;
+}
+
+/* ========================================
+   10. RESPONSIVIDADE - BREAKPOINTS
+   ======================================== */
+
+/* Tablet - 900px */
+@media (max-width: 900px) {
+    .tv-config-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .tv-status-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .tv-preset-buttons {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .tv-preset-import-export {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .tv-action-buttons {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .tv-action-buttons .tv-btn-primary,
+    .tv-action-buttons .tv-btn-secondary {
+        grid-column: 1 !important;
+    }
+}
+
+/* Mobile - 768px */
+@media (max-width: 768px) {
+    .tv-btn {
+        padding: 10px 20px !important;
+        font-size: 13px !important;
+    }
+    
+    .tv-panel-title {
+        font-size: 15px !important;
+    }
+}

@@ -1,0 +1,33 @@
+# TurboVoicer - Dependências Python
+# Versão: 1.0.0
+
+# Core dependencies
+numpy>=1.23.0
+scipy>=1.10.0
+librosa>=0.10.0
+soundfile>=0.12.0
+praat-parselmouth>=0.4.3
+pyworld>=0.3.2
+torchcrepe>=0.0.20
+resampy>=0.4.2
+
+# FAISS (para busca de características)
+# Será instalado como faiss-cpu ou faiss-gpu dependendo do hardware
+faiss-cpu>=1.7.4
+
+# NOTA: fairseq NÃO é instalado aqui pois:
+# 1. Causa conflito de dependências (omegaconf<2.1)
+# 2. RVC-GUI já vem com fairseq pré-instalado no pacote completo
+# 3. convert_rvc_direct.py usa o fairseq do RVC-GUI
+
+# RVC-API (repositório oficial)
+# Será instalado via: pip install git+https://github.com/RVC-Project/Retrieval-based-Voice-Conversion.git
+
+# Edge TTS (para geração de áudio base)
+edge-tts>=6.1.0
+
+# FFmpeg Python (para processamento de áudio no RVC)
+ffmpeg-python>=0.2.0
+
+# Utilitários
+tqdm>=4.65.0

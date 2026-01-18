@@ -1,0 +1,288 @@
+/**
+ * Audio Source Panel Styles - TurboVoicer
+ * Estilos isolados para o painel de Fonte de Áudio (Gravação e Importação)
+ */
+
+/* Descrição do painel */
+.tv-audio-source-description {
+    color: #aaa;
+    font-size: 14px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+/* Container de cada opção de fonte */
+.tv-audio-source-option {
+    margin-bottom: 16px;
+    border: 2px solid #333;
+    border-radius: 8px;
+    padding: 16px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.tv-audio-source-option:hover {
+    border-color: #444;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* Opção selecionada */
+.tv-audio-source-option:has(input:checked) {
+    border-color: #0A84FF;
+    background: rgba(10, 132, 255, 0.05);
+}
+
+/* Radio button (escondido) */
+.tv-audio-source-option input[type="radio"] {
+    display: none;
+}
+
+/* Label da opção */
+.tv-audio-source-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+    width: 100%;
+    pointer-events: none;
+}
+
+.tv-audio-source-label svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: #888;
+    transition: color 0.2s;
+}
+
+.tv-audio-source-option:has(input:checked) .tv-audio-source-label svg {
+    color: #0A84FF;
+}
+
+.tv-audio-source-label > div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.tv-source-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    display: block;
+}
+
+.tv-source-hint {
+    font-size: 13px;
+    color: #888;
+    display: block;
+    line-height: 1.4;
+}
+
+/* Controles de cada fonte (aparecem quando selecionado) */
+.tv-source-controls {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #333;
+}
+
+/* === GRAVAÇÃO === */
+
+.tv-recording-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.tv-btn-record {
+    background: linear-gradient(135deg, #FF0033 0%, #CC0029 100%);
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(255, 0, 51, 0.3);
+}
+
+.tv-btn-record:hover:not(:disabled) {
+    background: linear-gradient(135deg, #CC0029 0%, #A3001F 100%);
+    box-shadow: 0 4px 12px rgba(255, 0, 51, 0.4);
+    transform: translateY(-1px);
+}
+
+.tv-btn-record:disabled {
+    background: #555;
+    cursor: not-allowed;
+    opacity: 0.5;
+    box-shadow: none;
+}
+
+/* Botão gravando (pulsando) */
+.tv-btn-record.recording {
+    animation: pulse-record 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-record {
+    0%, 100% {
+        box-shadow: 0 2px 8px rgba(255, 0, 51, 0.3);
+    }
+    50% {
+        box-shadow: 0 4px 16px rgba(255, 0, 51, 0.6);
+    }
+}
+
+.tv-recording-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.tv-recording-timer {
+    font-family: 'Courier New', monospace;
+    font-size: 18px;
+    font-weight: 600;
+    color: #FF0033;
+    min-width: 60px;
+}
+
+.tv-btn-small {
+    padding: 6px 12px;
+    font-size: 13px;
+}
+
+.tv-recording-path {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.tv-path-label,
+.tv-file-label,
+.tv-folder-label {
+    color: #888;
+    font-weight: 500;
+}
+
+.tv-path-value,
+.tv-file-value,
+.tv-folder-value {
+    color: #fff;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* === IMPORTAÇÃO === */
+
+.tv-import-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.tv-import-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.tv-import-file,
+.tv-import-dest {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.tv-import-dest {
+    padding: 0;
+    background: none;
+}
+
+/* === CONVERSÃO EM LOTE === */
+
+.tv-batch-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.tv-batch-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.tv-batch-folder,
+.tv-batch-files {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.tv-files-count {
+    color: #0A84FF;
+    font-weight: 500;
+}
+
+/* Barra de progresso */
+.tv-batch-progress {
+    margin-top: 12px;
+}
+
+.tv-progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.tv-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #0A84FF 0%, #00FF88 100%);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.tv-progress-text {
+    font-size: 13px;
+    color: #aaa;
+    text-align: center;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .tv-recording-actions,
+    .tv-import-actions,
+    .tv-batch-actions {
+        flex-direction: column;
+    }
+    
+    .tv-recording-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

@@ -1,0 +1,274 @@
+/* Hardware Panel - Isolated Component */
+/* Following Golden Rule: Create isolated files with specific selectors */
+
+/* Hardware Panel Container */
+#tv-hardware-panel {
+    margin-bottom: 24px;
+}
+
+.tv-hardware-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Hardware Info Display */
+.tv-hardware-info {
+    background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.tv-hw-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 20px;
+}
+
+.tv-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #333;
+    border-top-color: #ff0033;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.tv-hw-loading p {
+    color: #888;
+    margin: 0;
+}
+
+/* Hardware Profile Display */
+.tv-hw-profile {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.tv-hw-icon {
+    font-size: 48px;
+    line-height: 1;
+}
+
+.tv-hw-details {
+    flex: 1;
+}
+
+.tv-hw-type {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tv-hw-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.tv-hw-badge.gpu {
+    background: linear-gradient(135deg, #00ff88 0%, #00cc66 100%);
+    color: #000;
+}
+
+.tv-hw-badge.cpu {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: #000;
+}
+
+.tv-hw-description {
+    color: #aaa;
+    font-size: 14px;
+    margin: 0 0 12px 0;
+}
+
+.tv-hw-specs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.tv-hw-spec {
+    background: #0d0d0d;
+    border: 1px solid #222;
+    border-radius: 6px;
+    padding: 12px;
+}
+
+.tv-hw-spec-label {
+    font-size: 11px;
+    color: #666;
+    text-transform: uppercase;
+    margin: 0 0 4px 0;
+}
+
+.tv-hw-spec-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    margin: 0;
+}
+
+/* Quality Info */
+.tv-hw-quality {
+    margin-top: 16px;
+    padding: 16px;
+    background: #0d0d0d;
+    border: 1px solid #222;
+    border-radius: 6px;
+}
+
+.tv-hw-quality h4 {
+    margin: 0 0 12px 0;
+    font-size: 14px;
+    color: #fff;
+}
+
+.tv-hw-quality-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.tv-hw-quality-item {
+    text-align: center;
+}
+
+.tv-hw-quality-label {
+    font-size: 11px;
+    color: #666;
+    margin: 0 0 4px 0;
+}
+
+.tv-hw-quality-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: #00ff88;
+    margin: 0;
+}
+
+/* Warning Display */
+.tv-hw-warning {
+    margin-top: 16px;
+    padding: 12px;
+    background: rgba(255, 153, 0, 0.1);
+    border: 1px solid rgba(255, 153, 0, 0.3);
+    border-radius: 6px;
+    color: #ff9900;
+    font-size: 13px;
+}
+
+.tv-hw-warning p {
+    margin: 0;
+}
+
+/* Manual Override */
+.tv-hardware-override {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.tv-hardware-override .tv-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.tv-checkbox {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.tv-override-controls {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #333;
+}
+
+.tv-override-controls .tv-label {
+    display: block;
+    margin-bottom: 8px;
+    cursor: default;
+}
+
+/* Warning Panel */
+.tv-warning-panel {
+    background: linear-gradient(135deg, rgba(255, 153, 0, 0.1) 0%, rgba(255, 153, 0, 0.05) 100%);
+    border: 1px solid rgba(255, 153, 0, 0.3);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.tv-warning-icon {
+    font-size: 48px;
+    line-height: 1;
+}
+
+.tv-warning-content {
+    flex: 1;
+}
+
+.tv-warning-content h3 {
+    margin: 0 0 12px 0;
+    color: #ff9900;
+    font-size: 18px;
+}
+
+.tv-warning-content p {
+    margin: 0 0 12px 0;
+    color: #ddd;
+    font-size: 14px;
+}
+
+.tv-warning-content ul {
+    margin: 0;
+    padding-left: 20px;
+    color: #aaa;
+    font-size: 13px;
+}
+
+.tv-warning-content li {
+    margin: 6px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .tv-hw-profile {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .tv-hw-specs {
+        grid-template-columns: 1fr;
+    }
+
+    .tv-hw-quality-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tv-warning-panel {
+        flex-direction: column;
+        text-align: center;
+    }
+}
